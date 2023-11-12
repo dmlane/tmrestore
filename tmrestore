@@ -9,6 +9,17 @@
 CONFIG_DIR=${script_dir}/conf
 STAGING_DIR=/tmp/.tmrestore.stage
 
+function get_mackup_folder {
+	local dir
+	dir=$(readlinkf $(command -v mackup))
+	${dir%/*}/python <<EOF
+import mackup
+from mackup import constants
+import os
+print(os.path.dirname(mackup.__file__)+"/"+constants.APPS_DIR)
+EOF
+}
+
 function get_config {
 	export APP=$(crudini --get $1  application name)
 	# Files relative to $HOME
