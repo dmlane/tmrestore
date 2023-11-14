@@ -16,7 +16,8 @@
 DOCXX
 #------------------------------------------------------------------------------
 
-ETC_PATH=HB_ETC
+
+. $(readlinkf $0|sed 's?/[^/]*$??')/common.env
 
 function get_config {
 	# Get content of cfg file into variables
